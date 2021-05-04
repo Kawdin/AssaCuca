@@ -1,4 +1,3 @@
-from src.App import App
+from src.assa_app import AssaCucaApp
 
-APP = App()
-APP.atualiza_eventos()
+AssaCucaApp()
