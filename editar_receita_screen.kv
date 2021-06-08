@@ -1,0 +1,71 @@
+<Ingredientes@MDScreen>:
+    name: "ingredientes_screen"
+    MDFloatLayout:
+        orientation: "vertical"
+        MDCard:
+            size_hint: .75, .10
+            pos_hint: {"center_x": .5, "center_y": .80}
+            elevation: 10
+            MDFloatLayout:
+                MDLabel:
+                    text: "Tempo de preparo:"
+                    pos_hint: {"center_x": .55, "center_y": .5}
+
+                MDTextField:
+                    size_hint: .5, None
+                    pos_hint: {"center_x": .70, "center_y": .5}
+                    icon_left: "close"
+                    hint_text: "Ex:3h34min"
+        MDCard:
+            size_hint: .70, .10
+            pos_hint: {"center_x": .5, "center_y": .65}
+            elevation: 10
+            MDFloatLayout:
+                MDLabel:
+                    text: "Rendimento:"
+                    pos_hint: {"center_x": .60, "center_y": .5}
+
+                MDTextField:
+                    size_hint: .5, None
+                    pos_hint: {"center_x": .65, "center_y": .5}
+                    icon_left: "close"
+                    hint_text: "Quantidade"
+        MDCard:
+            size_hint: .65, .15
+            pos_hint: {"center_x": .5, "center_y": .45}
+            elevation: 10
+            orientation: "vertical"
+            MDLabel:
+                text: "Dificuldade"
+                halign: "center"
+            MDFloatLayout:
+
+                CheckDificuldades:
+                    pos_hint: {"center_x": .25, "center_y": .5}
+                CheckDificuldades:
+                    pos_hint: {"center_x": .5, "center_y": .5}
+                CheckDificuldades:
+                    pos_hint: {"center_x": .75, "center_y": .5}
+
+            MDFloatLayout:
+                pos_hint: {"center_x": .95}
+                MDLabel:
+                    text: 'Fácil'
+                    pos_hint: {"center_x": .25, "center_y": .6}
+                MDLabel:
+                    text: "Médio"
+                    pos_hint: {"center_x": .49, "center_y": .6}
+                MDLabel:
+                    text: "Difícil"
+                    pos_hint: {"center_x": .74, "center_y": .6}
+
+<CheckDificuldades@MDCheckbox>:
+    group: "dificuldade"
+    size_hint: None, None
+
+<ModoDePreparo@MDScreen>:
+    name: "modo_de_preparo_screen"
+    MDBoxLayout:
+        MDLabel:
+            text: "preparo"
+            halign: "center"

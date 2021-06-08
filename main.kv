@@ -1,0 +1,158 @@
+#:include receitas_screen.kv
+#:include editar_receita_screen.kv
+
+TelaPrincipal:
+
+    MDBoxLayout:
+        orientation: 'vertical'
+        MDToolbar:
+            id: toolbar_main
+            title: "AssaCuca"
+            left_action_items: [["menu", lambda x: app.root.ids.nav_drawer.set_state("open")]]
+            right_action_items: [["plus", lambda x: root.adicionar_receita()]]
+
+        ScreenManager:
+            id: screen_manager
+            BolosScreen:
+            DocesScreen:
+            PaesScreen:
+            SalgadosScreen:
+            ReceitaInformacoes:
+
+    MDNavigationDrawer:
+        id: nav_drawer
+        ScrollView:
+            orientation: "vertical"
+            MDBoxLayout:
+                size_hint_y: dp(.32)
+                orientation: "vertical"
+
+                OneLineIconListItem:
+                    text: "Bolos"
+                    on_press:
+                        root.ids.screen_manager.current = "bolos_screen"
+
+                    IconLeftWidget:
+                        icon: "cake-layered"
+
+                OneLineIconListItem:
+                    text: "Doces"
+                    on_press:
+                        root.ids.screen_manager.current = 'doces_screen'
+
+                    IconLeftWidget:
+                        icon: "ice-pop"
+
+                OneLineIconListItem:
+                    text: "Pães"
+                    on_press:
+                        root.ids.screen_manager.current = 'paes_screen'
+                    IconLeftWidget:
+                        icon: "baguette"
+
+                OneLineIconListItem:
+                    text: "Salgados"
+                    on_press:
+                        root.ids.screen_manager.current = 'salgados_screen'
+                        print(root.ids.screen_manager.current)
+                    IconLeftWidget:
+                        icon: "shaker"
+
+<ReceitaInformacoes>:
+    name: "receita_informacao"
+    MDFloatLayout:
+        orientation: "vertical"
+        MDBoxLayout:
+            orientation: "horizontal"
+            md_bg_color: app.theme_cls.primary_color
+            pos_hint: {"center_y": 1}
+            size_hint_y: .15
+            MDFlatButton:
+                text: "Ingredientes"
+                size_hint: .5, .5
+                theme_text_color: 'Custom'
+                text_color: 1,1,1,1
+                on_press:
+                    root.ids.screen_manager_editar.current = "ingredientes_screen"
+
+
+            MDFlatButton:
+                text: 'Modo de Preparo'
+                size_hint: .5, .5
+                theme_text_color: 'Custom'
+                text_color: 1,1,1,1
+                on_press:
+                    root.ids.screen_manager_editar.current = "modo_de_preparo_screen"
+
+        ScreenManager:
+            id: screen_manager_editar
+            Ingredientes:
+            ModoDePreparo:
+
+<AddReceita@MDCard>:
+    id: card_adicionar_receita
+    pos_hint: {"center_x": .5, "center_y": .5}
+    size_hint: .5, .5
+    orientation: 'vertical'
+    MDBoxLayout:
+        orientation: 'horizontal'
+        size_hint_y: .25
+        md_bg_color: app.theme_cls.primary_color
+        MDLabel:
+            text: '  Nova Receita'
+            halign: 'center'
+            theme_text_color: 'Custom'
+            text_color: 1,1,1,1
+            font_size: 22
+
+        MDIconButton:
+            icon: 'window-close'
+            size_hint_y: 1
+            theme_text_color: "Custom"
+            text_color: 1,1,1,1
+            font_size: 52
+            on_press:
+                app.root.remove_widget(root)
+
+    MDFloatLayout:
+        orientation: 'vertical'
+        MDTextField:
+            id: receita_nome
+            pos_hint: {'center_x': .5, 'center_y': .5}
+            size_hint_x: .8
+            hint_text: 'Nome da Receita'
+            font_size: 24
+
+        MDFlatButton:
+            pos_hint: {'center_x': .5, 'center_y': .25}
+            text: "criar"
+            on_press:
+                app.root.receita_texto = root.ids.receita_nome.text
+                tela = app.root.ids.screen_manager.current
+                app.root.ids.screen_manager.get_screen(tela).ids.caixa_receitas.adicionar_receita()
+                app.root.remove_widget(root)
+
+<CardReceita@MDCardSwipe>:
+    height: card_receita.height
+    size_hint_x: 1
+
+    type_swipe: "hand"
+    MDCardSwipeLayerBox:
+        MDIconButton:
+            icon: "trash-can"
+            on_press:
+                tela = app.root.ids.screen_manager.current
+                app.root.ids.screen_manager.get_screen(tela).ids.caixa_receitas.remove_widget(root)
+        MDIconButton:
+            icon: "border-color"
+            on_press:
+                app.root.ids.screen_manager.current = 'receita_informacao'
+                app.root.ids.toolbar_main.right_action_items = [["keyboard-return", lambda x: x]]
+
+    MDCardSwipeFrontBox:
+        OneLineListItem:
+            size_hint_x: .5
+            id: card_receita
+            text: app.root.receita_texto
+            on_press:
+                ...
