@@ -60,34 +60,7 @@ TelaPrincipal:
 
 <ReceitaInformacoes>:
     name: "receita_informacao"
-    MDFloatLayout:
-        orientation: "vertical"
-        MDBoxLayout:
-            orientation: "horizontal"
-            md_bg_color: app.theme_cls.primary_color
-            pos_hint: {"center_y": 1}
-            size_hint_y: .15
-            MDFlatButton:
-                text: "Ingredientes"
-                size_hint: .5, .5
-                theme_text_color: 'Custom'
-                text_color: 1,1,1,1
-                on_press:
-                    root.ids.screen_manager_editar.current = "ingredientes_screen"
-
-
-            MDFlatButton:
-                text: 'Modo de Preparo'
-                size_hint: .5, .5
-                theme_text_color: 'Custom'
-                text_color: 1,1,1,1
-                on_press:
-                    root.ids.screen_manager_editar.current = "modo_de_preparo_screen"
-
-        ScreenManager:
-            id: screen_manager_editar
-            Ingredientes:
-            ModoDePreparo:
+    Ingredientes:
 
 <AddReceita@MDCard>:
     id: card_adicionar_receita

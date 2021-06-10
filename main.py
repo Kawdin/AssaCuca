@@ -3,10 +3,8 @@ from kivymd.app import MDApp
 from kivy.core.window import Window
 from kivymd.uix.card import MDCard, MDCardSwipe
 from kivymd.uix.floatlayout import MDFloatLayout
-from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.screen import MDScreen
 from kivymd.uix.list import MDList
-from kivymd.uix.tab import MDTabsBase
 
 Window.size = (480, 620)
 
@@ -17,9 +15,6 @@ class CardReceita(MDCardSwipe):
     ...
 
 class ReceitaInformacoes(MDScreen):
-    ...
-
-class TabelaInformacoes(MDFloatLayout, MDTabsBase):
     ...
 
 class ListaReceitas(MDList):
